@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JapaneseNumerals;
 
 use InvalidArgumentException;
+use Navarr\Attribute\Dependency;
 use Stringable;
 
 class FromJapaneseConverter
@@ -55,6 +56,7 @@ class FromJapaneseConverter
         '無量大数' => '68',
     ];
 
+    #[Dependency('ext-bcmath', '*', 'This uses bcmath functions because we support numbers larger than PHP_INT_MAX')]
     private function convertLeftOfDecimal(string $number): string
     {
         $result = '0';
@@ -125,6 +127,7 @@ class FromJapaneseConverter
         return self::NUMERAL_MAPPING[$japaneseNumeral];
     }
 
+    #[Dependency('ext-mbstring', '*', 'We use multibyte string functions to split Japanese strings')]
     private function convertRightOfDecimal(string $number): string
     {
         $numberPieces = mb_str_split($number);
