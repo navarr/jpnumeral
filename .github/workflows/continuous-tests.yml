@@ -30,5 +30,10 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           extensions: bcmath
+          coverage: xdebug
       - run: composer install
-      - run: vendor/bin/phpunit tests/
+      - run: vendor/bin/phpunit tests/ --coverage-clover clover.xml
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
