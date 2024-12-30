@@ -1,3 +1,6 @@
 .composer/
 composer.lock
 vendor/
+.warden-config.yml
+clover.xml
+.phpunit.cache/
