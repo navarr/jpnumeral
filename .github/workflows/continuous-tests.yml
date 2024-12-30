@@ -22,3 +22,13 @@ jobs:
           extensions: bcmath
       - run: composer install
       - run: vendor/bin/phpmd src/ github phpmd.ruleset.xml
+  phpunit:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          extensions: bcmath
+      - run: composer install
+      - run: vendor/bin/phpunit tests/
