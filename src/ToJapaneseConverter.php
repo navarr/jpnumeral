@@ -29,10 +29,10 @@ class ToJapaneseConverter
         $placeHolderAmount = (int)((ceil(strlen($number) / 4) * 4) - strlen($number));
         $stringNumber = str_repeat('0', $placeHolderAmount) . $number;
 
-        $i = 4;
-        while ($i <= strlen($stringNumber)) {
-            $dataArray[] = substr($stringNumber, -$i, 4);
-            $i += 4;
+        $myriadStartIndex = 4;
+        while ($myriadStartIndex <= strlen($stringNumber)) {
+            $dataArray[] = substr($stringNumber, -$myriadStartIndex, 4);
+            $myriadStartIndex += 4;
         }
 
         $myriadStrings = [];
@@ -105,9 +105,9 @@ class ToJapaneseConverter
 
         if (!str_contains($number, '.')) {
             return $this->convertLeftOfDecimal($number);
-        } else {
-            [$left, $right] = explode('.', $number);
-            return $this->convertLeftOfDecimal($left) . '・' . $this->convertRightOfDecimal($right);
         }
+
+        [$left, $right] = explode('.', $number);
+        return $this->convertLeftOfDecimal($left) . '・' . $this->convertRightOfDecimal($right);
     }
 }

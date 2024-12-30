@@ -12,6 +12,13 @@ use JapaneseNumerals\Provider\RegularMyriadProvider;
 use JapaneseNumerals\Provider\RegularNumeralProvider;
 use JapaneseNumerals\ToJapaneseConverter;
 
+/**
+ * Convenient builder for creating ToJapaneseConverter instances
+ *
+ * This file simplifies the construction of ToJapaneseConverter classes for the typical use-case.
+ *
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
 class ToJapaneseConverterBuilder
 {
     public function build(bool $useFormalNumerals = false, bool $useFormalDivisions = false, bool $useFormalMyriads = false): ToJapaneseConverter

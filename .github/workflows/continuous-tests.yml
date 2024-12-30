@@ -1,0 +1,22 @@
+name: Continuous Testing
+on: [push]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: php-actions/composer@v6
+      - name: PHPStan Static Analysis
+        uses: php-actions/phpstan@v3
+  phpmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: php-actions/composer@v6
+      - name: PHPMD Static Analysis
+        uses: php-actions/phpmd@v1
+        with:
+          path: src/
+          output: github
+          ruleset: phpmd.ruleset.xml

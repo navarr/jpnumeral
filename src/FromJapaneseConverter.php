@@ -62,7 +62,10 @@ class FromJapaneseConverter
         $result = '0';
         $remainingNumber = $number;
 
-        $mapping = array_reduce(array_keys(self::MYRIAD_MAPPING), function ($carry, $item) {
+        /**
+         * @var array<non-empty-string, numeric-string> $mapping
+         */
+        $mapping = array_reduce(array_keys(self::MYRIAD_MAPPING), function (array $carry, $item) {
             $carry[$item] = bcpow('10', self::MYRIAD_MAPPING[$item]);
             return $carry;
         }, []);
@@ -74,13 +77,8 @@ class FromJapaneseConverter
                 throw new InvalidArgumentException('Invalid number format.');
             }
             if (count($check) === 2) {
-                if ($check[0] === '') {
-                    $left = '1';
-                    // Technically invalid... but it's fine
-                } else {
-                    $left = $this->convertDivision($check[0]);
-                }
-                $result = bcadd($result, bcmul((string)$left, (string)$value));
+                $left = $check[0] === '' ? '1' : $this->convertDivision($check[0]);
+                $result = bcadd($result, bcmul((string)$left, $value));
                 $remainingNumber = $check[1];
             }
         }
@@ -104,11 +102,7 @@ class FromJapaneseConverter
                 throw new InvalidArgumentException('Invalid number format.');
             }
             if (count($check) === 2) {
-                if ($check[0] === '') {
-                    $left = 1;
-                } else {
-                    $left = $this->convertNumeral($check[0]);
-                }
+                $left = $check[0] === '' ? 1 : $this->convertNumeral($check[0]);
                 $result += $left * $value;
                 $remainingNumber = $check[1];
             }
