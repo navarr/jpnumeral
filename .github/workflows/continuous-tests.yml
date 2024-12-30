@@ -3,26 +3,22 @@ on: [push]
 
 jobs:
   phpstan:
+    name: Static Analysis
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           extensions: bcmath
-      - uses: php-actions/composer@v6
-      - name: PHPStan Static Analysis
-        uses: php-actions/phpstan@v3
+      - run: composer install
+      - run: vendor/bin/phpstan analyse
   phpmd:
+    name: Mess Detector
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           extensions: bcmath
-      - uses: php-actions/composer@v6
-      - name: PHPMD Static Analysis
-        uses: php-actions/phpmd@v1
-        with:
-          path: src/
-          output: github
-          ruleset: phpmd.ruleset.xml
+      - run: composer install
+      - run: vendor/bin/phpmd src/ github phpmd.ruleset.xml
