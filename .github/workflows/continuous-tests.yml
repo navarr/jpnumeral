@@ -32,8 +32,13 @@ jobs:
           extensions: bcmath
           coverage: xdebug
       - run: composer install
-      - run: vendor/bin/phpunit tests/ --coverage-clover clover.xml
+      - run: vendor/bin/phpunit tests/ --coverage-clover clover.xml --log-junit junit.xml
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
