@@ -3,15 +3,9 @@
 namespace JapaneseNumerals\Test;
 
 use JapaneseNumerals\Builder\ToJapaneseConverterBuilder;
-use JapaneseNumerals\ToJapaneseConverter;
 
 class ToJapaneseConverterTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     /**
      * @param non-empty-string $japanese
      * @param numeric-string $arabic
