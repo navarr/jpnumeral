@@ -77,7 +77,7 @@ class ToJapaneseConverter
             }
 
             $myriadStringPieces[] = $this->myriadProvider->getByIndex($myriadIndex);
-            $myriadStrings[] = $myriadStringPieces;
+            array_unshift($myriadStrings, $myriadStringPieces);
         }
 
         return empty($myriadStrings)
