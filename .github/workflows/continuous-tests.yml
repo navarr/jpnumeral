@@ -42,3 +42,15 @@ jobs:
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+  phpcs:
+    name: Code Style (PSR-12)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: composer install
+
+      - name: PHP Code Sniffer
+        run: vendor/bin/phpcs

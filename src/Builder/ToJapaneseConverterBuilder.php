@@ -21,8 +21,11 @@ use JapaneseNumerals\ToJapaneseConverter;
  */
 class ToJapaneseConverterBuilder
 {
-    public function build(bool $useFormalNumerals = false, bool $useFormalDivisions = false, bool $useFormalMyriads = false): ToJapaneseConverter
-    {
+    public function build(
+        bool $useFormalNumerals = false,
+        bool $useFormalDivisions = false,
+        bool $useFormalMyriads = false
+    ): ToJapaneseConverter {
         $numeralProvider = $useFormalNumerals ? new FormalNumeralProvider() : new RegularNumeralProvider();
         $divisionProvider = $useFormalDivisions ? new FormalDivisionProvider() : new RegularDivisionProvider();
         $myriadProvider = $useFormalMyriads ? new FormalMyriadProvider() : new RegularMyriadProvider();
