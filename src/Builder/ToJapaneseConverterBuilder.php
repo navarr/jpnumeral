@@ -17,7 +17,7 @@ use JapaneseNumerals\ToJapaneseConverter;
  *
  * This file simplifies the construction of ToJapaneseConverter classes for the typical use-case.
  *
- * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ * @SuppressWarnings("PHPMD.BooleanArgumentFlag")
  */
 class ToJapaneseConverterBuilder
 {
