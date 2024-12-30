@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          extensions: bcmath
       - uses: php-actions/composer@v6
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
@@ -13,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          extensions: bcmath
       - uses: php-actions/composer@v6
       - name: PHPMD Static Analysis
         uses: php-actions/phpmd@v1
