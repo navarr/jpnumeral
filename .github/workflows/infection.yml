@@ -1,0 +1,25 @@
+name: Infection Testing
+on: [push]
+
+jobs:
+  infection:
+    name: Infection Check
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: xdebug
+          ini-values: error_reporting=-1
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install
+
+      - name: Check for Mutants
+        env:
+          INFECTION_BADGE_API_KEY: ${{ secrets.STRYKER_TOKEN }}
+        run: vendor/bin/infection --threads=$(nproc) --min-msi=100 --no-progress --logger-github
